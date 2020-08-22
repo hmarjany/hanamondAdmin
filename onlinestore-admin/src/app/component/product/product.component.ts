@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RedComponentComponent } from "../red-component/red-component.component";
 import { GridOptions } from "ag-grid-community";
 import { EditComponentComponent } from "../edit-component/edit-component.component";
+import { EditCategoryCellRendererComponent } from '../edit-category-cell-renderer/edit-category-cell-renderer.component';
+import { Category } from 'src/app/model/enum/category';
 
 @Component({
   selector: 'app-product',
@@ -50,10 +52,10 @@ export class ProductComponent implements OnInit {
         editable: false
       },
       {
-        headerName: "Value",
-        field: "value",
-        cellRenderer: this.isEditable() ? 'redCellRenderer' : '',
-        cellEditor: 'editCellRenderer',
+        headerName: "Category",
+        field: "category",
+        cellRenderer: this.isEditable() ? 'editCategoryCellRenderer' : '',
+        cellEditor: 'editCategoryCellRenderer',
         width: 100,
         editable: this.isCheck
 
@@ -125,9 +127,10 @@ export class ProductComponent implements OnInit {
     this.gridOptions.frameworkComponents = {
       editCellRenderer: EditComponentComponent,
       redCellRenderer: RedComponentComponent,
+      editCategoryCellRenderer:EditCategoryCellRendererComponent
     }
     this.gridOptions.rowData = [
-      { id: 1, value: '5', value2: '10' },
+      { id: 1, category:Category.Wears, value: '5', value2: '10' },
       { id: 2, value: '6', value2: '20' },
       { id: 3, value: '7', value2: '30' }
     ]

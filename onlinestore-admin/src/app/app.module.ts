@@ -7,17 +7,19 @@ import { ProductComponent } from './component/product/product.component';
 import { EditComponentComponent } from './component/edit-component/edit-component.component';
 import { RedComponentComponent } from './component/red-component/red-component.component';
 import { FormsModule } from '@angular/forms';
+import { EditCategoryCellRendererComponent } from './component/edit-category-cell-renderer/edit-category-cell-renderer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductComponent,
     EditComponentComponent,
-    RedComponentComponent
+    RedComponentComponent,
+    EditCategoryCellRendererComponent
   ],
   imports: [
     BrowserModule,
-    AgGridModule.withComponents([EditComponentComponent,RedComponentComponent]),
+    AgGridModule.withComponents([EditComponentComponent,RedComponentComponent,EditCategoryCellRendererComponent]),
     FormsModule
   ],
   providers: [],
