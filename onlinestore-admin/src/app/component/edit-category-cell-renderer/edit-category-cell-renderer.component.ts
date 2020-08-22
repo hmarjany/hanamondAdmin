@@ -1,30 +1,34 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { INoRowsOverlayAngularComp } from 'ag-grid-angular';
-import { Category } from 'src/app/model/enum/category';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-edit-category-cell-renderer',
   templateUrl: './edit-category-cell-renderer.component.html',
   styleUrls: ['./edit-category-cell-renderer.component.scss']
 })
-export class EditCategoryCellRendererComponent  implements INoRowsOverlayAngularComp {
+export class EditCategoryCellRendererComponent implements INoRowsOverlayAngularComp {
 
-  ngOnInit(): void {
-
-  }
   public params: any;
   public category: any;
-  Category: any = Category;
+  public EnumType: any;
+  public value: any;
+  id: number;
+  constructor(){
+    this.id = Math.random();
+  }
 
-  @ViewChild('dynamicComponent', {static: true, read: ViewContainerRef}) container: ViewContainerRef;
-
+  @ViewChild('containerCategory', { static: false }) containerCategory: MatSelect;
+  
   agInit(params: any): void {
+    var enumType = params.colDef.cellRendererParams;
+    this.EnumType = enumType;
     this.params = params;
-    this.category = this.params.value;
+    this.value = this.params.value;
   }
 
   getValue(): any {
-    return this.category;
+    return this.value;
   }
 
   isCancelAfterEnd(): boolean {
@@ -33,9 +37,15 @@ export class EditCategoryCellRendererComponent  implements INoRowsOverlayAngular
 
   ngAfterViewInit() {
     window.setTimeout(() => {
-      //this.container.element.nativeElement.focus();
+      this.containerCategory.focus();
+      this.selectFavouriteVegetableBasedOnSelectedIndex();
+
     });
+
   }
 
-  
+  private selectFavouriteVegetableBasedOnSelectedIndex() {
+    this.containerCategory._elementRef.nativeElement.click();
+  }
+
 }

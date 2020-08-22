@@ -7,22 +7,19 @@ import {
   OnInit
 } from '@angular/core';
 
-import { ICellEditorAngularComp } from 'ag-grid-angular';
+import { ICellEditorAngularComp, INoRowsOverlayAngularComp } from 'ag-grid-angular';
 
 @Component({
   selector: 'app-edit-component',
   templateUrl: './edit-component.component.html',
   styleUrls: ['./edit-component.component.scss']
 })
-export class EditComponentComponent implements OnInit {
+export class EditComponentComponent implements INoRowsOverlayAngularComp {
 
-  ngOnInit(): void {
-
-  }
   public params: any;
   public value: any;
 
-  @ViewChild('dynamicComponent', {static: true, read: ViewContainerRef}) container: ViewContainerRef;
+  @ViewChild('container', {static: true, read: ViewContainerRef}) container: ViewContainerRef;
 
   agInit(params: any): void {
     this.params = params;

@@ -9,7 +9,7 @@ export class Product{
     CategoryType?: CategoryType;
     SubCategory?: SubCategory;
     ImagePath?: String;
-    public Name?: String;
+    Name?: String;
     Price?: Number;
     Barnd?: Brand;
     Sale?: Boolean;

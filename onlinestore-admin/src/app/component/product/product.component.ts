@@ -4,6 +4,13 @@ import { GridOptions } from "ag-grid-community";
 import { EditComponentComponent } from "../edit-component/edit-component.component";
 import { EditCategoryCellRendererComponent } from '../edit-category-cell-renderer/edit-category-cell-renderer.component';
 import { Category } from 'src/app/model/enum/category';
+import { CategoryType } from 'src/app/model/enum/CategoryType';
+import { Product } from 'src/app/model/Product';
+import { AdditionalInfo } from 'src/app/model/AdditionalInfo';
+import { Brand } from 'src/app/model/enum/Brand';
+import { SubCategory } from 'src/app/model/enum/SubCategory';
+import { UplodFileComponent } from '../uplod-file/uplod-file.component';
+import { CheckBoxComponent } from '../check-box/check-box.component';
 
 @Component({
   selector: 'app-product',
@@ -15,84 +22,143 @@ export class ProductComponent implements OnInit {
   isEdit = false;
   isCheck = true;
   edit = 'Dont Edit';
+  products: Product[];
   constructor() {
 
     this.gridOptions = <GridOptions>{
       enableSorting: true,
       enableFilter: true
     };
-  }
-  setColumnDefs() {
-    this.gridOptions.columnDefs = [
-      {
-        headerName: "ID",
-        field: "id",
-        width: 100,
-        editable: false
-      },
-      {
-        headerName: "Value",
-        field: "value",
-        cellRenderer: this.isEditable() ? 'redCellRenderer' : '',
-        cellEditor: 'editCellRenderer',
-        width: 100,
-        editable: this.isCheck
 
+    this.products = [
+      {
+        Name: "test1", Price: 1000, ImagePath: 'assets/carousel-1bg.png', AdditinalInfos: new AdditionalInfo()
+        , Barnd: Brand.Ecco, Category: Category.Food, CategoryType: CategoryType.Shoe, Quantity: 10, Sale
+          : true, Sepcification: "بسیار خفن", SpecialOffer: false, SubCategory: SubCategory.Female
       },
-
-    ];
-    return this.gridOptions.columnDefs;
+    ]
   }
+  
   getColumnDefs() {
     this.gridOptions.columnDefs = [
       {
-        headerName: "ID",
-        field: "id",
-        width: 100,
-        editable: false
-      },
-      {
-        headerName: "Category",
-        field: "category",
+        field: "Category",
         cellRenderer: this.isEditable() ? 'editCategoryCellRenderer' : '',
         cellEditor: 'editCategoryCellRenderer',
-        width: 100,
+        editable: this.isCheck,
+        cellRendererParams:Category,
+        singleClickEdit:true
+      },
+      {
+        field: "CategoryType",
+        cellRenderer: this.isEditable() ? 'editCategoryCellRenderer' : '',
+        cellEditor: 'editCategoryCellRenderer',
+        editable: this.isCheck,
+        cellRendererParams:CategoryType
+      },
+      {
+        field: "SubCategory",
+        cellRenderer: this.isEditable() ? 'editCategoryCellRenderer' : '',
+        cellEditor: 'editCategoryCellRenderer',
+        editable: this.isCheck,
+        cellRendererParams:SubCategory
+      },
+      {
+        field: "ImagePath",
+        cellRenderer: this.isEditable() ? 'redCellRenderer' : '',
+        cellEditor: 'UplodFileComponent',
         editable: this.isCheck
 
       },
       {
-        headerName: "Value2",
-        field: "value2",
+        field: "Name",
         cellRenderer: this.isEditable() ? 'redCellRenderer' : '',
         cellEditor: 'editCellRenderer',
-        width: 100,
-        editable: this.isCheck,
-        valueSetter: function test2(params) {
-          console.log(params);
-          if (params.newValue != parseInt(params.oldValue)) {
-            params.data.value2 = parseInt(params.newValue) * 2;
-            console.log('ValueSetter', parseInt(params.newValue) * 2)
-          } else {
-            params.data.value2 = params.data.value2;
-          }
-          return true;
-        },
-        cellRendererParams: function (params) {
-          return { validationMsg: 'Hello World' + params.value };
-        },
-      },
+        editable: this.isCheck
 
+      },
       {
-        headerName: "Diff",
-        width: 100,
-        valueGetter: function aPlusBValueGetter(params) {
-          if (params.data.value2 && params.data.value) {
-            return parseInt(params.data.value2) - parseInt(params.data.value);
-          }
+        field: "Price",
+        cellRenderer: this.isEditable() ? 'redCellRenderer' : '',
+        cellEditor: 'editCellRenderer',
+        editable: this.isCheck
 
-        },
-        editable: false
       },
+      {
+        field: "Barnd",
+        cellRenderer: this.isEditable() ? 'editCategoryCellRenderer' : '',
+        cellEditor: 'editCategoryCellRenderer',
+        editable: this.isCheck,
+        cellRendererParams:Brand
+      },
+      {
+        field: "Sale",
+        cellRenderer: this.isEditable() ? 'CheckBoxComponent' : '',
+        cellEditor: 'CheckBoxComponent',
+        editable: this.isCheck
+
+      },
+      {
+        field: "SpecialOffer",
+        cellRenderer: this.isEditable() ? 'CheckBoxComponent' : '',
+        cellEditor: 'CheckBoxComponent',
+        editable: this.isCheck
+
+      },
+      {
+        field: "Sepcification",
+        cellRenderer: this.isEditable() ? 'redCellRenderer' : '',
+        cellEditor: 'editCellRenderer',
+        editable: this.isCheck
+
+      },
+      {
+        field: "AdditinalInfos",
+        cellRenderer: this.isEditable() ? 'redCellRenderer' : '',
+        cellEditor: 'editCellRenderer',
+        editable: this.isCheck
+
+      },
+      {
+        field: "Quantity",
+        cellRenderer: this.isEditable() ? 'redCellRenderer' : '',
+        cellEditor: 'editCellRenderer',
+        editable: this.isCheck
+      }
+      // },
+      // {
+      //   headerName: "Value2",
+      //   field: "value2",
+      //   cellRenderer: this.isEditable() ? 'redCellRenderer' : '',
+      //   cellEditor: 'editCellRenderer',
+      //   width: 100,
+      //   editable: this.isCheck,
+      //   valueSetter: function test2(params) {
+      //     console.log(params);
+      //     if (params.newValue != parseInt(params.oldValue)) {
+      //       params.data.value2 = parseInt(params.newValue) * 2;
+      //       console.log('ValueSetter', parseInt(params.newValue) * 2)
+      //     } else {
+      //       params.data.value2 = params.data.value2;
+      //     }
+      //     return true;
+      //   },
+      //   cellRendererParams: function (params) {
+      //     return { validationMsg: 'Hello World' + params.value };
+      //   },
+      // },
+
+      // {
+      //   headerName: "Diff",
+      //   width: 100,
+      //   valueGetter: function aPlusBValueGetter(params) {
+      //     if (params.data.value2 && params.data.value) {
+      //       return parseInt(params.data.value2) - parseInt(params.data.value);
+      //     }
+
+      //   },
+      //   editable: false
+      // },
 
 
     ];
@@ -101,7 +167,9 @@ export class ProductComponent implements OnInit {
   defaultColumnDefs() {
     if (this.isCheck) {
       this.gridOptions.defaultColDef = {
-        width: 100,
+        resizable:true,
+        flex:1,
+        minWidth:220,
         editable: function (params) {
           return (
             true
@@ -110,7 +178,9 @@ export class ProductComponent implements OnInit {
       }
     } else {
       this.gridOptions.defaultColDef = {
-        width: 100,
+        resizable:true,
+        flex:1,
+        minWidth:220,
         editable: function (params) {
           return (
             false
@@ -127,13 +197,11 @@ export class ProductComponent implements OnInit {
     this.gridOptions.frameworkComponents = {
       editCellRenderer: EditComponentComponent,
       redCellRenderer: RedComponentComponent,
-      editCategoryCellRenderer:EditCategoryCellRendererComponent
+      editCategoryCellRenderer: EditCategoryCellRendererComponent,
+      UplodFileComponent: UplodFileComponent,
+      CheckBoxComponent: CheckBoxComponent
     }
-    this.gridOptions.rowData = [
-      { id: 1, category:Category.Wears, value: '5', value2: '10' },
-      { id: 2, value: '6', value2: '20' },
-      { id: 3, value: '7', value2: '30' }
-    ]
+    this.gridOptions.rowData = this.products;
     this.gridOptions.singleClickEdit = true;
   }
 

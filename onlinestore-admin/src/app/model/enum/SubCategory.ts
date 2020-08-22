@@ -5,3 +5,11 @@ export enum SubCategory{
     FemaleKid,
     MaleKid
 }
+
+export namespace SubCategory {
+    export function values() {
+        return Object.keys(SubCategory).filter(
+            (type) => isNaN(<any>type) && type !== 'values'
+        );
+    }
+}
