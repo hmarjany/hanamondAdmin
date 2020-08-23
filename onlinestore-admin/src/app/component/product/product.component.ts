@@ -11,6 +11,7 @@ import { Brand } from 'src/app/model/enum/Brand';
 import { SubCategory } from 'src/app/model/enum/SubCategory';
 import { UplodFileComponent } from '../uplod-file/uplod-file.component';
 import { CheckBoxComponent } from '../check-box/check-box.component';
+import { AdditionalInfoComponent } from '../additional-info/additional-info.component';
 
 @Component({
   selector: 'app-product',
@@ -23,6 +24,7 @@ export class ProductComponent implements OnInit {
   isCheck = true;
   edit = 'Dont Edit';
   products: Product[];
+  additionalInfo = [{key:'keyTst',value:'valueTst'},{key:'keyTst01',value:'valueTst01'}];
   constructor() {
 
     this.gridOptions = <GridOptions>{
@@ -32,7 +34,7 @@ export class ProductComponent implements OnInit {
 
     this.products = [
       {
-        Name: "test1", Price: 1000, ImagePath: 'assets/carousel-1bg.png', AdditinalInfos: new AdditionalInfo()
+        Name: "test1", Price: 1000, ImagePath: 'assets/carousel-1bg.png', AdditinalInfos:this.additionalInfo
         , Barnd: Brand.Ecco, Category: Category.Food, CategoryType: CategoryType.Shoe, Quantity: 10, Sale
           : true, Sepcification: "بسیار خفن", SpecialOffer: false, SubCategory: SubCategory.Female
       },
@@ -115,7 +117,7 @@ export class ProductComponent implements OnInit {
       {
         field: "AdditinalInfos",
         cellRenderer: this.isEditable() ? 'redCellRenderer' : '',
-        cellEditor: 'editCellRenderer',
+        cellEditor: 'AdditionalInfoComponent',
         editable: this.isCheck
 
       },
@@ -199,7 +201,8 @@ export class ProductComponent implements OnInit {
       redCellRenderer: RedComponentComponent,
       editCategoryCellRenderer: EditCategoryCellRendererComponent,
       UplodFileComponent: UplodFileComponent,
-      CheckBoxComponent: CheckBoxComponent
+      CheckBoxComponent: CheckBoxComponent,
+      AdditionalInfoComponent:AdditionalInfoComponent
     }
     this.gridOptions.rowData = this.products;
     this.gridOptions.singleClickEdit = true;

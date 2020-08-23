@@ -45,7 +45,7 @@ export class EditCategoryCellRendererComponent implements INoRowsOverlayAngularC
   }
 
   private selectFavouriteVegetableBasedOnSelectedIndex() {
-    this.containerCategory._elementRef.nativeElement.click();
+    //this.containerCategory._elementRef.nativeElement.click();
   }
 
 }

@@ -15,7 +15,7 @@ export class Product{
     Sale?: Boolean;
     SpecialOffer?: Boolean;
     Sepcification?: String;
-    AdditinalInfos?: AdditionalInfo;
+    AdditinalInfos?: {key:String,value:String}[];
     Comments?: Comment;
     Quantity?: Number;
 }

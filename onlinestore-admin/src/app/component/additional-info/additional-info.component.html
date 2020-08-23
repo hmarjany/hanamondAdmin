@@ -1,0 +1,7 @@
+<div #containerDic
+    style="position: fixed; background-color: whitesmoke;min-width: 400px; border: whitesmoke thin solid;overflow-x: auto;max-height: 600px;">
+    <div *ngFor="let dic of value" style="display: flex;flex-wrap: nowrap;align-items: center;padding: 10px;border-bottom: dimgrey solid thin;">
+            <input matInput disabled="true" style="margin: 10px;border: none;" [(ngModel)]="dic.key">
+            <textarea style="width: 100%;" [(ngModel)]="dic.value"></textarea>
+    </div>
+</div>

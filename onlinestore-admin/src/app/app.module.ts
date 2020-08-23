@@ -17,6 +17,7 @@ import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { CheckBoxComponent } from './component/check-box/check-box.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AdditionalInfoComponent } from './component/additional-info/additional-info.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +27,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     RedComponentComponent,
     EditCategoryCellRendererComponent,
     UplodFileComponent,
-    CheckBoxComponent
+    CheckBoxComponent,
+    AdditionalInfoComponent
   ],
   imports: [
     BrowserModule,
     AgGridModule.withComponents([EditComponentComponent,RedComponentComponent,EditCategoryCellRendererComponent,
-      UplodFileComponent, CheckBoxComponent]),
+      UplodFileComponent, CheckBoxComponent,AdditionalInfoComponent]),
     FormsModule,
     BrowserAnimationsModule,
     MatSelectModule,
